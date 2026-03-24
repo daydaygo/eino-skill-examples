@@ -10,36 +10,33 @@
 
 eino-skill 是一个 AI 编码助手技能，帮助开发者使用 Eino 框架构建 LLM 应用。
 
+**GitHub 仓库**: https://github.com/daydaygo/eino-skill
+
 ### 方法一：复制到本地技能目录
 
 ```bash
 # 克隆仓库
-git clone https://github.com/daydaygo/eino-skill-examples.git
+git clone https://github.com/daydaygo/eino-skill.git
 
 # 复制技能到本地目录
 mkdir -p ~/.agents/skills/eino-skill
-cp eino-skill-examples/SKILL.md ~/.agents/skills/eino-skill/
-cp -r eino-skill-examples/references ~/.agents/skills/eino-skill/
+cp -r eino-skill/* ~/.agents/skills/eino-skill/
 ```
 
-### 方法二：在 Claude Code / OpenCode 中使用
+### 方法二：在 Claude Code 中使用
 
-在项目的 `AGENTS.md` 或 `CLAUDE.md` 中添加：
-
-```markdown
-## Eino 框架分析
-
-> 来源：eino-skill 技能
-
-### 框架简介
-Eino 是 CloudWeGo 开源的 Go 语言 LLM 应用开发框架。
-...
-```
-
-### 方法三：通过 opencode 安装
+将仓库克隆到 Claude Code 的 skills 目录：
 
 ```bash
-opencode skill install eino-skill
+git clone https://github.com/daydaygo/eino-skill.git ~/.claude/skills/eino-skill
+```
+
+### 方法三：在 OpenCode 中使用
+
+将仓库克隆到 OpenCode 的 skills 目录：
+
+```bash
+git clone https://github.com/daydaygo/eino-skill.git ~/.agents/skills/eino-skill
 ```
 
 ## 快速开始
@@ -209,9 +206,10 @@ supervisor.SetSubAgents(mathAgent, researchAgent)
 ## 相关链接
 
 - **Eino 官方文档**: https://www.cloudwego.io/zh/docs/eino/
-- **GitHub 仓库**: https://github.com/cloudwego/eino
-- **扩展库**: https://github.com/cloudwego/eino-ext
-- **示例代码**: https://github.com/cloudwego/eino-examples
+- **Eino 核心**: https://github.com/cloudwego/eino
+- **Eino 扩展**: https://github.com/cloudwego/eino-ext
+- **Eino 示例**: https://github.com/cloudwego/eino-examples
+- **eino-skill**: https://github.com/daydaygo/eino-skill
 
 ## License
 

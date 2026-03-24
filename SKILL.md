@@ -231,7 +231,7 @@ result, _ := chain.Invoke(ctx, map[string]any{"query": "Hello"})
 - **OpenAI**: `eino-ext/components/model/openai`
 - **字节火山引擎 Ark**: `eino-ext/components/model/ark`
 - **Ollama 本地**: `eino-ext/components/model/ollama`
-- **其他**: 查看 einfo-ext/components/model 目录
+- **其他**: 查看 eino-ext/components/model 目录
 
 ### Q: 流式输出如何处理？
 
@@ -259,6 +259,7 @@ for {
 ## 相关链接
 
 - GitHub: https://github.com/cloudwego/eino
-- 扩展库: https://github.com/cloudwego/einfo-ext
+- 扩展库: https://github.com/cloudwego/eino-ext
 - 示例: https://github.com/cloudwego/eino-examples
 - 文档: https://www.cloudwego.io/zh/docs/eino/
+- eino-skill: https://github.com/daydaygo/eino-skill
