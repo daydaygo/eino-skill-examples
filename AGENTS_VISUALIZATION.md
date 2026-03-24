@@ -23,6 +23,7 @@
 5. [高级 Agent](#5-高级-agent)
    - [Manus Agent](#manus-agent)
    - [Tool Call Agent Graph](#tool-call-agent-graph)
+   - [Deer-Go Agent](#deer-go-agent)
 
 ---
 
@@ -565,6 +566,99 @@ compiled, _ := graph.Compile(ctx)
 
 ---
 
+### Deer-Go Agent
+
+**文件位置**: `flow/agent/deer-go/main.go`
+
+参考 deer-flow 的研究团队协作模式，通过协调员调度多个专业 Agent 完成复杂研究任务。
+
+```mermaid
+flowchart TD
+    START((START))
+    
+    subgraph COORD["Coordinator (协调员)"]
+        COORD_CORE[coordinator<br/>研究协调员<br/>调度团队工作流]
+    end
+
+    subgraph TEAM["研究团队"]
+        PLANNER[planner<br/>研究规划专家<br/>分解主题, 制定计划]
+        
+        subgraph RESEARCH["研究阶段"]
+            R1[researcher_1<br/>研究员1<br/>web_search, save_note]
+            R2[researcher_2<br/>研究员2<br/>web_search, save_note]
+        end
+        
+        ANALYST[analyst<br/>分析师<br/>get_note, 综合分析]
+        WRITER[writer<br/>报告撰写专家<br/>撰写研究报告]
+        REVIEWER[reviewer<br/>审核专家<br/>审核报告质量]
+    end
+
+    QUERY[/用户研究请求/]
+    END((END))
+
+    START --> QUERY --> COORD_CORE
+    COORD_CORE --> PLANNER
+    PLANNER --> COORD_CORE
+    COORD_CORE --> R1
+    COORD_CORE --> R2
+    R1 --> COORD_CORE
+    R2 --> COORD_CORE
+    COORD_CORE --> ANALYST
+    ANALYST --> COORD_CORE
+    COORD_CORE --> WRITER
+    WRITER --> COORD_CORE
+    COORD_CORE --> REVIEWER
+    REVIEWER --> COORD_CORE
+    COORD_CORE --> END
+
+    style COORD_CORE fill:#e3f2fd
+    style PLANNER fill:#fff3e0
+    style R1 fill:#e8f5e9
+    style R2 fill:#e8f5e9
+    style ANALYST fill:#f3e5f5
+    style WRITER fill:#fce4ec
+    style REVIEWER fill:#e0f7fa
+```
+
+**特点**:
+- 协调员模式，统一调度团队
+- 支持并行研究（多研究员同时工作）
+- 共享研究状态 (ResearchState)
+- 完整的研究流程：规划 -> 研究 -> 分析 -> 撰写 -> 审核
+
+**研究工具**:
+- `web_search`: 搜索互联网获取研究资料
+- `save_note`: 保存研究笔记
+- `get_note`: 获取研究笔记
+
+**代码示例**:
+```go
+coordinatorAgent, _ := adk.NewChatModelAgent(ctx, &adk.ChatModelAgentConfig{
+    Name:        "coordinator",
+    Description: "研究协调员，负责协调整个研究流程",
+    Instruction: "协调团队成员：planner, researcher, analyst, writer, reviewer",
+    Model:       model,
+})
+
+// 设置子 Agent
+coordinatorAgentWithSubAgents, _ := adk.SetSubAgents(ctx, coordinatorAgent, team)
+
+// 并行研究模式
+parallelResearchAgent, _ := adk.NewParallelAgent(ctx, &adk.ParallelAgentConfig{
+    Name:      "parallel_research",
+    SubAgents: []adk.Agent{researcher1, researcher2},
+})
+```
+
+**工作流程**:
+1. **规划阶段**: planner 分析主题，分解子主题
+2. **研究阶段**: researcher 并行搜索资料，保存笔记
+3. **分析阶段**: analyst 综合研究笔记，发现洞察
+4. **撰写阶段**: writer 撰写结构化研究报告
+5. **审核阶段**: reviewer 审核报告质量
+
+---
+
 ## 附录：Agent 模式对比
 
 | 模式 | 适用场景 | 复杂度 | 灵活性 |
@@ -579,6 +673,7 @@ compiled, _ := graph.Compile(ctx)
 | Loop Agent | 迭代优化任务 | 低 | 中 |
 | HITL Approval | 敏感操作确认 | 中 | 中 |
 | Manus Agent | 复杂编程研必 | 高 | 高 |
+| Deer-Go Agent | 研究团队协作 | 高 | 高 |
 
 ---
 
