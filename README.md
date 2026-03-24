@@ -6,38 +6,7 @@
 
 **Eino['aino]** 是 CloudWeGo 开源的 Go 语言大模型应用开发框架。本仓库包含完整的 Eino 框架使用示例，涵盖组件、编排、Agent、多智能体协作等核心功能。
 
-## 安装 eino-skill
-
-eino-skill 是一个 AI 编码助手技能，帮助开发者使用 Eino 框架构建 LLM 应用。
-
-**GitHub 仓库**: https://github.com/daydaygo/eino-skill
-
-### 方法一：复制到本地技能目录
-
-```bash
-# 克隆仓库
-git clone https://github.com/daydaygo/eino-skill.git
-
-# 复制技能到本地目录
-mkdir -p ~/.agents/skills/eino-skill
-cp -r eino-skill/* ~/.agents/skills/eino-skill/
-```
-
-### 方法二：在 Claude Code 中使用
-
-将仓库克隆到 Claude Code 的 skills 目录：
-
-```bash
-git clone https://github.com/daydaygo/eino-skill.git ~/.claude/skills/eino-skill
-```
-
-### 方法三：在 OpenCode 中使用
-
-将仓库克隆到 OpenCode 的 skills 目录：
-
-```bash
-git clone https://github.com/daydaygo/eino-skill.git ~/.agents/skills/eino-skill
-```
+> **AI 编码助手技能**: [eino-skill](https://github.com/daydaygo/eino-skill) - 帮助开发者使用 Eino 框架构建 LLM 应用
 
 ## 快速开始
 
