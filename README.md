@@ -11,6 +11,14 @@
 
 ### 安装 eino-skill
 
+在 AI 编码助手中执行：
+
+```
+add eino-skill from https://github.com/daydaygo/eino-skill
+```
+
+或手动安装：
+
 **Claude Code:**
 ```bash
 git clone https://github.com/daydaygo/eino-skill.git ~/.claude/skills/eino-skill
